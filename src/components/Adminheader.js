@@ -44,7 +44,7 @@ const Adminheader = ({ toggleSidebar }) => {
         <a href="/sadmin/dashboard" className="hover:text-blue-600">Dashboard</a>
         <a href="/sadmin/create-booking" className="hover:text-blue-600">Bookings</a>
         <a href="/sadmin/employee" className="hover:text-blue-600">Employees</a>
-        <a href="/sadmin/report" className="hover:text-blue-600">Reports</a>
+         <a href="/sadmin/report" className="hover:text-blue-600">Generate Report</a>
         <a href="/sadmin/settings" className="hover:text-blue-600">Settings</a>
         <div className="mr-6">
           <FaPhoneAlt className="text-green-600 text-xl animate-ping absolute" />
