@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaTachometerAlt, FaUsers, FaCalendarCheck, FaTools, FaChartBar, FaCog, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaTachometerAlt, FaUsers,FaShoppingCart, FaCalendarCheck, FaTools, FaChartBar, FaCog, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 const Adminsidebar = ({ isSidebarOpen, toggleSidebar }) => {
   const [openMenu, setOpenMenu] = useState(null);
@@ -11,21 +11,36 @@ const Adminsidebar = ({ isSidebarOpen, toggleSidebar }) => {
 
   const menuItems = [
     { name: 'Dashboard', icon: <FaTachometerAlt />, link: '/sadmin/dashboard' },
+    { name: 'Branch', icon: <FaTools />, subMenu: [
+      { name: 'View Branch', link: '/sadmin/view-branch' },
+      { name: 'Assign Branch ', link: '/sadmin/assign-branch' }
+    ]},
     { name: 'Bookings', icon: <FaCalendarCheck />, subMenu: [
       { name: 'Create Booking', link: '/sadmin/create-booking' },
       { name: 'View Booking', link: '/sadmin/view-booking' }
     ]},
+   
     { name: 'Services', icon: <FaTools />, subMenu: [
       { name: 'Create Services', link: '/sadmin/create-service' },
-      { name: 'View Services', link: '/sadmin/view-services' }
+      { name: 'View Services', link: '/sadmin/view-services' },
+      { name: 'Assign Services', link: '/sadmin/assign-staff' },
+      { name: 'Services Detail', link: '/sadmin/services-duration' },
     ]},
+    {
+      name: 'Product', icon: <FaShoppingCart />, subMenu: [
+        { name: 'Create Product', link: '/sadmin/create-product' },
+        { name: 'Display All Products', link: '/sadmin/display-product' },
+        { name: 'Stock Management', link: '/sadmin/stock-management' }
+      ]
+    },
     { name: 'Customers', icon: <FaUsers />, subMenu: [
       { name: 'Create Customer', link: '/sadmin/create-customer' },
       { name: 'All Customers', link: '/sadmin/view-allcustomer' }
     ]},
     { name: 'Employees', icon: <FaUsers />, subMenu: [
       { name: 'Create Employee', link: '/sadmin/employee' },
-      { name: 'All Employees', link: '/sadmin/view-employee' }
+      { name: 'All Employees', link: '/sadmin/view-employee' },
+      { name: 'Assign Role', link: '/sadmin/assign-role' }
     ]},
     { name: 'Reports', icon: <FaChartBar />, subMenu: [
       { name: 'All Reports', link: '/sadmin/report' },
@@ -34,12 +49,12 @@ const Adminsidebar = ({ isSidebarOpen, toggleSidebar }) => {
       { name: 'Booking Report', link: '/sadmin/booking-report' }
     ]},
     { name: 'Settings', icon: <FaCog />, subMenu: [
-      { name: 'User Settings', link: '/sadmin/settings' }
+      { name: 'Assign Branch ', link: '/sadmin/assign-branch' }
     ]}
   ];
 
   return (
-    <aside className={`fixed bg-white inset-y-0 left-0 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 transition-transform duration-300 ease-in-out w-80 bg-gradient-to-b text-black p-4 z-30 shadow-lg md:relative`}>
+    <aside className={`fixed bg-white inset-y-0 left-0 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 transition-transform duration-300 ease-in-out w-80 bg-gradient-to-b text-black p-4 z-30 shadow-lg md:relative overflow-y-auto max-h-screen`}>
       <nav>
         <ul className="space-y-4">
           {menuItems.map((item, index) => (
