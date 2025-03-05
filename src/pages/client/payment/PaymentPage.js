@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../api/axiosConfig";
+import axios from "../../../api/axiosConfig";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ClientLayout from "../../layouts/ClientLayout";
+import ClientLayout from "../../../layouts/ClientLayout";
 
 const PaymentPage = () => {
     const [clients, setClients] = useState([]);

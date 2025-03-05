@@ -1,5 +1,5 @@
 import React from "react";
-import ClientLayout from "../../layouts/ClientLayout";
+import ClientLayout from "../../../layouts/ClientLayout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-import ClientLayout from "../../layouts/ClientLayout";
+import ClientLayout from "../../../layouts/ClientLayout";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const localizer = momentLocalizer(moment);

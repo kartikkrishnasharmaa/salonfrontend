@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-
+import React, { useEffect,useState } from "react";
+import { useSelector } from 'react-redux';
+import axios from "../../api/axiosConfig";
 import SAAdminLayout from "../../layouts/Salonadmin";
 import BranchSelector from "../../components/BranchSelector";
-import { dummyEmployees, dummyCustomers, dummyAppointments } from '../../data/dummyData';
-
-
 import {
   FaUserTie,
   FaChartLine,
   FaUsers,
   FaMoneyBillWave,
 } from "react-icons/fa";
+
 import {
   LineChart,
   Line,
@@ -30,25 +28,22 @@ import {
 } from "recharts";
 
 const SADashboard = () => {
-  const selectedBranch = useSelector((state) => state.branch.selectedBranch);
-
-  const filteredEmployees = dummyEmployees.filter((emp) => emp.branch === selectedBranch);
-  const filteredCustomers = dummyCustomers.filter((cust) => cust.branch === selectedBranch);
-  const filteredAppointments = dummyAppointments.filter((appt) => appt.branch === selectedBranch);
-
-  const [userData, setUserData] = useState(null);
+  const selectedBranch = useSelector(state => state.branch.selectedBranch);
+  const [customers, setCustomers] = useState([]);
+  
   useEffect(() => {
-    // Get the user data from localStorage (if available)
-    const user = JSON.parse(localStorage.getItem("salonAdmin"));
-    if (user) {
-      setUserData(user); // Set the user data
-    } else {
-      // Handle case where the user is not logged in
-      window.location.href = "/login"; // Redirect to login page
-    }
-  }, []);
-  // Dummy Data for Charts
-  const revenueData = [
+      if (selectedBranch) {
+          console.log("Fetching Customers for Branch ID:", selectedBranch);
+          
+          axios.get(`/customer/salon/customers?branchId=${selectedBranch}`, { 
+              headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+          })
+          .then(res => setCustomers(res.data))
+          .catch(error => console.error("Error fetching customers:", error));
+      }
+  }, [selectedBranch]);
+  
+ const revenueData = [
     { month: "Jan", revenue: 5000 },
     { month: "Feb", revenue: 7000 },
     { month: "Mar", revenue: 8000 },
@@ -84,38 +79,33 @@ const SADashboard = () => {
   return (
     <SAAdminLayout>
       <BranchSelector />
-      <div className="mt-4">
-        {selectedBranch ? (
-          <p className="text-lg font-semibold text-gray-700">
-            Showing data for: <span className="text-blue-600">{selectedBranch}</span>
-          </p>
-        ) : (
-          <p className="text-lg text-gray-600">Please select a branch.</p>
-        )}
-      </div>
-
-      {selectedBranch && (
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* Employees Count */}
-          <div className="bg-white p-4 shadow-md rounded-lg">
-            <h2 className="text-xl font-semibold">Employees</h2>
-            <p className="text-2xl font-bold text-blue-600">{filteredEmployees.length}</p>
-          </div>
-
-          {/* Customers Count */}
-          <div className="bg-white p-4 shadow-md rounded-lg">
-            <h2 className="text-xl font-semibold">Customers</h2>
-            <p className="text-2xl font-bold text-green-600">{filteredCustomers.length}</p>
-          </div>
-
-          {/* Appointments Count */}
-          <div className="bg-white p-4 shadow-md rounded-lg">
-            <h2 className="text-xl font-semibold">Appointments</h2>
-            <p className="text-2xl font-bold text-red-600">{filteredAppointments.length}</p>
-          </div>
-        </div>
-      )}
-
+      <h2>Customers</h2>
+      {customers.customers && customers.customers.length > 0 ? (
+    <table className="w-full border-collapse border border-gray-200 mt-4">
+        <thead>
+            <tr className="bg-gray-100">
+                <th className="border border-gray-300 p-2">Name</th>
+                <th className="border border-gray-300 p-2">Phone</th>
+                <th className="border border-gray-300 p-2">Email</th>
+                <th className="border border-gray-300 p-2">Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {customers.customers.map((c) => (
+                <tr key={c._id} className="text-center">
+                    <td className="border border-gray-300 p-2">{c.name}</td>
+                    <td className="border border-gray-300 p-2">{c.phone}</td>
+                    <td className="border border-gray-300 p-2">{c.email}</td>
+                    <td className="border border-gray-300 p-2">
+                        {new Date(c.createdAt).toLocaleString()}
+                    </td>
+                </tr>
+            ))}
+        </tbody>
+    </table>
+) : (
+    <p>No customers found for this branch.</p>
+)}
       {/* Dashboard Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 mt-4 gap-6">
         <div className="bg-blue-100 p-4 rounded-lg shadow-md flex items-center">
@@ -247,7 +237,7 @@ const SADashboard = () => {
               </div>
             ))}
           </div>
-         </div>
+        </div>
 
         {/* Customer Growth Chart */}
         <div className="bg-white p-4 shadow-lg rounded-lg">
@@ -267,7 +257,7 @@ const SADashboard = () => {
             </AreaChart>
           </ResponsiveContainer>
         </div>
-      </div>  
+      </div>
 
       {/* Recent Appointments Table */}
       <div className="bg-white p-4 shadow-lg rounded-lg mt-6">
