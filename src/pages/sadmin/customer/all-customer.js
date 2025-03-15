@@ -1,78 +1,61 @@
 import React, { useEffect, useState } from "react";
-import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import { useSelector } from 'react-redux';
 import SAAdminLayout from "../../../layouts/Salonadmin";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "../../../api/axiosConfig";
 
-
 const CustomerTable = () => {
+  const selectedBranch = useSelector(state => state.branch.selectedBranch);
   const [customers, setCustomers] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  // ✅ Fetch customers on component mount
+  
   useEffect(() => {
-    const fetchCustomers = async () => {
-      try {
-        const token = localStorage.getItem("token"); // 🛑 Ensure salon admin token is stored
-        if (!token) {
-          toast.error("Unauthorized! Please log in again.");
-          return;
-        }
-
-        const response = await axios.get("/customer/salon/customers", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        setCustomers(response.data.customers);
-      } catch (error) {
-        console.error("Error fetching customers:", error);
-        toast.error("Failed to fetch customers!");
-      } finally {
-        setLoading(false);
+      if (selectedBranch) {
+          console.log("Fetching Customers for Branch ID:", selectedBranch);
+          
+          axios.get(`/customer/salon/customers?branchId=${selectedBranch}`, { 
+              headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+          })
+          .then(res => setCustomers(res.data))
+          .catch(error => console.error("Error fetching customers:", error));
       }
-    };
-
-    fetchCustomers();
-  }, []);
-
+  }, [selectedBranch]);
   return (
     <SAAdminLayout>
       <div className="overflow-x-auto">
-        <h1 className="text-2xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 drop-shadow-lg shadow-blue-500/50 transform transition duration-300 hover:scale-105">
-          Total Customers: <strong>{customers.length}</strong>
-        </h1>
+      <h1 className="text-2xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 drop-shadow-lg shadow-blue-500/50">
+  Total Customers: <strong>{customers.customers ? customers.customers.length : 0}</strong>
+</h1>
 
-        {loading ? (
-          <p className="text-center text-gray-500">Loading customers...</p>
-        ) : customers.length === 0 ? (
-          <p className="text-center text-red-500">No customers found!</p>
-        ) : (
-          <table className="min-w-full table-auto bg-white shadow-md rounded-lg overflow-hidden">
-            <thead className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
-              <tr>
-                <th className="px-6 py-3 text-left">Customer Name</th>
-                <th className="px-6 py-3 text-left">Email</th>
-                <th className="px-6 py-3 text-left">Phone</th>
-                <th className="px-6 py-3 text-left">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="text-gray-700">
-              {customers.map((customer) => (
-                <tr key={customer._id} className="hover:bg-gray-100 border-b transition-all">
-                  <td className="px-6 py-4">{customer.name}</td>
-                  <td className="px-6 py-4">{customer.email}</td>
-                  <td className="px-6 py-4">{customer.phone}</td>
-                  <td className="px-6 py-4 flex space-x-4">
-                    <FaEye className="text-blue-500 cursor-pointer" title="View" />
-                    <FaEdit className="text-yellow-500 cursor-pointer" title="Edit" />
-                    <FaTrash className="text-red-500 cursor-pointer" title="Delete" />
-                  </td>
+        {customers.customers && customers.customers.length > 0 ? (
+    <table className="w-full border-collapse border border-gray-200 mt-4">
+        <thead>
+            <tr className="bg-gray-100">
+            <th className="py-3 px-4 text-left">S.No</th>
+                <th className="border border-gray-300 p-2">Name</th>
+                <th className="border border-gray-300 p-2">Phone</th>
+                <th className="border border-gray-300 p-2">Email</th>
+                <th className="border border-gray-300 p-2">Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {customers.customers.map((c,index) => (
+                <tr key={c._id} className="text-center">
+                      <td className="py-3 px-4 border">{index + 1}</td>
+                    <td className="border border-gray-300 p-2">{c.name}</td>
+                    <td className="border border-gray-300 p-2">{c.phone}</td>
+                    <td className="border border-gray-300 p-2">{c.email}</td>
+                    <td className="border border-gray-300 p-2">
+                        {new Date(c.createdAt).toLocaleString()}
+                    </td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+            ))}
+        </tbody>
+    </table>
+) : (
+    <p>No customers found for this branch.</p>
+)}
+      
       </div>
       <ToastContainer />
     </SAAdminLayout>
