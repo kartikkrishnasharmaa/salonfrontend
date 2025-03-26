@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { FaTachometerAlt, FaUsers, FaShoppingCart, FaCalendarCheck, FaTools, FaChartBar, FaCog, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaTachometerAlt, FaUsers, FaShoppingCart, FaCalendarCheck, FaTools, FaChartBar, FaCog, FaChevronDown, FaChevronUp ,FaMoneyBillWave} from 'react-icons/fa';
 
 const Adminsidebar = ({ isSidebarOpen, toggleSidebar }) => {
   const [openMenu, setOpenMenu] = useState(null);
@@ -30,6 +30,7 @@ const Adminsidebar = ({ isSidebarOpen, toggleSidebar }) => {
       { name: 'Services Detail', link: selectedBranch ? `/sadmin/services-duration?branchId=${selectedBranch}` : '/sadmin/services-duration' }
     ]},
     { name: 'Product', icon: <FaShoppingCart />, subMenu: [
+      { name: 'Create Catgeory', link: selectedBranch ? `/sadmin/create-category?branchId=${selectedBranch}` : '/sadmin/create-category' },
       { name: 'Create Product', link: selectedBranch ? `/sadmin/create-product?branchId=${selectedBranch}` : '/sadmin/create-product' },
       { name: 'Display All Products', link: selectedBranch ? `/sadmin/display-product?branchId=${selectedBranch}` : '/sadmin/display-product' },
       { name: 'Stock Management', link: selectedBranch ? `/sadmin/stock-management?branchId=${selectedBranch}` : '/sadmin/stock-management' }
@@ -48,6 +49,9 @@ const Adminsidebar = ({ isSidebarOpen, toggleSidebar }) => {
       { name: 'Customer Report', link: selectedBranch ? `/sadmin/customer-report?branchId=${selectedBranch}` : '/sadmin/customer-report' },
       { name: 'Employee Report', link: selectedBranch ? `/sadmin/employee-report?branchId=${selectedBranch}` : '/sadmin/employee-report' },
       { name: 'Booking Report', link: selectedBranch ? `/sadmin/booking-report?branchId=${selectedBranch}` : '/sadmin/booking-report' }
+    ]},
+    { name: 'Orders', icon: <FaMoneyBillWave />, subMenu: [
+      { name: 'All Orders', link: selectedBranch ? `/sadmin/all-orders?branchId=${selectedBranch}` : '/sadmin/all-orders' },
     ]},
     { name: 'Settings', icon: <FaCog />, subMenu: [
       { name: 'Assign Branch', link: '/sadmin/assign-branch' }

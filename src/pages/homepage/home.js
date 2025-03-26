@@ -157,11 +157,6 @@ const Home = () => {
             <div className="flex flex-col items-center bg-white p-6 shadow-lg rounded-lg">
               <a href="/signup" className="px-6 py-2 bg-pink-500 text-white rounded-lg mb-4 w-auto">MANAGER ADMIN SIGNIN</a>
             </div>
-            <div className="flex flex-col items-center bg-white p-6 shadow-lg rounded-lg">
-              <a href="/client/login" className="px-6 py-2 bg-yellow-500 text-white rounded-lg mb-4 w-auto">CUSTOMER LOGIN</a>
-              <a href="/client/signup" className="px-6 py-2 bg-yellow-500 text-white rounded-lg mb-4 w-auto">CUSTOMER SIGNUP</a>
-              <a href="/client/dashboard" className="px-6 py-2 bg-yellow-500 text-white rounded-lg mb-4 w-auto">CUSTOMER DASHBOARD</a>
-            </div>
           </div>
         </div>
       </div>
