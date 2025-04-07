@@ -1,37 +1,39 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
-import Salondashboard from "../pages/sadmin/dashboard";
-import Calender from "../pages/sadmin/booking/index";
-import SAViewBooking from "../pages/sadmin/booking/viewbooking";
-import Employee from "../pages/sadmin/employee/index";
-import SAreport from "../pages/sadmin/report/index";
-import Customerreport from "../pages/sadmin/report/customer-report";
-import EmployeeReport from "../pages/sadmin/report/employee-report";
-import BookingReport from "../pages/sadmin/report/booking-report";
-import SASetting from "../pages/sadmin/settings/index";
-import SAViewEmployee from "../pages/sadmin/employee/viewEmployee";
-import ProfilePage from "../pages/sadmin/profilepage";
-import Createcustomer from "../pages/sadmin/customer/create-customer";
-import SAallCustomer from "../pages/sadmin/customer/all-customer";
-import CreateService from "../pages/sadmin/service/createservice";
-import ViewService from "../pages/sadmin/service/viewservice";
-import CreateProduct from "../pages/sadmin/product/createproduct";
-import AllProduct from "../pages/sadmin/product/allproduct";
-import Stockmangement from "../pages/sadmin/product/stockmanagement";
-import Assignrole from "../pages/sadmin/employee/assignrole";
-import AssignStaff from "../pages/sadmin/service/assignstaff";
-import ViewServicee from "../pages/sadmin/service/viewservice";
-import ViewBranch from "../pages/sadmin/branch/view-branch";
-import SalonNewBooking from "../pages/sadmin/booking/newbooking";
-import Allorders from "../pages/sadmin/orders/allorders";
-import CreateCategory from "../pages/sadmin/product/createcategory";
+import Salondashboard from "../pages/salonadmin/dashboard";
+import Calender from "../pages/salonadmin/booking/index";
+import SAViewBooking from "../pages/salonadmin/booking/viewbooking";
+import Employee from "../pages/salonadmin/employee/index";
+import SAreport from "../pages/salonadmin/report/index";
+import Customerreport from "../pages/salonadmin/report/customer-report";
+import EmployeeReport from "../pages/salonadmin/report/employee-report";
+import BookingReport from "../pages/salonadmin/report/booking-report";
+import SASetting from "../pages/salonadmin/settings/index";
+import SAViewEmployee from "../pages/salonadmin/employee/viewEmployee";
+import ProfilePage from "../pages/salonadmin/profilepage";
+import Createcustomer from "../pages/salonadmin/customer/create-customer";
+import SAallCustomer from "../pages/salonadmin/customer/all-customer";
+import CreateService from "../pages/salonadmin/service/createservice";
+import ViewService from "../pages/salonadmin/service/viewservice";
+import CreateProduct from "../pages/salonadmin/product/createproduct";
+import AllProduct from "../pages/salonadmin/product/allproduct";
+import Assignrole from "../pages/salonadmin/employee/assignrole";
+import ViewServicee from "../pages/salonadmin/service/viewservice";
+import ViewBranch from "../pages/salonadmin/branch/view-branch";
+import MainbranchPage from "../pages/salonadmin/branch/main";
+import SalonNewBooking from "../pages/salonadmin/booking/newbooking";
+import Allorders from "../pages/salonadmin/orders/allorders";
+import CreateCategory from "../pages/salonadmin/product/createcategory";
+import CreateServiceCategory from "../pages/salonadmin/service/createcategory";
+import SalonCalendardummy from "../pages/salonadmin/booking/SalonCalendar";
+import ClientDetails from "../pages/salonadmin/customer/client-info";
 
 const SalonAdminRoutes = () => {
   return (
     <Routes>
       <Route
-        path="/sadmin/dashboard"
+        path="/salonadmin/dashboard"
         element={
           <ProtectedRoute>
             <Salondashboard />
@@ -39,7 +41,15 @@ const SalonAdminRoutes = () => {
         }
       />
       <Route
-        path="/sadmin/create-booking"
+        path="/salonadmin/btesting"
+        element={
+          <ProtectedRoute>
+            <SalonCalendardummy />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/salonadmin/create-booking"
         element={
           <ProtectedRoute>
             <Calender />
@@ -48,7 +58,7 @@ const SalonAdminRoutes = () => {
       />
 
       <Route
-        path="/sadmin/view-booking"
+        path="/salonadmin/view-booking"
         element={
           <ProtectedRoute>
             <SAViewBooking />
@@ -56,7 +66,7 @@ const SalonAdminRoutes = () => {
         }
       />
       <Route
-        path="/sadmin/new-booking"
+        path="/salonadmin/new-booking"
         element={
           <ProtectedRoute>
             <SalonNewBooking />
@@ -64,15 +74,23 @@ const SalonAdminRoutes = () => {
         }
       />
       <Route
-        path="/sadmin/create-service"
+        path="/salonadmin/create-service"
         element={
           <ProtectedRoute>
             <CreateService />
           </ProtectedRoute>
         }
       />
+         <Route
+        path="/salonadmin/create-service-category"
+        element={
+          <ProtectedRoute>
+            <CreateServiceCategory />
+          </ProtectedRoute>
+        }
+      />
       <Route
-        path="/sadmin/view-services"
+        path="/salonadmin/view-services"
         element={
           <ProtectedRoute>
             <ViewService />
@@ -80,7 +98,7 @@ const SalonAdminRoutes = () => {
         }
       />
       <Route
-        path="/sadmin/create-customer"
+        path="/salonadmin/create-customer"
         element={
           <ProtectedRoute>
             <Createcustomer />
@@ -88,7 +106,7 @@ const SalonAdminRoutes = () => {
         }
       />
       <Route
-        path="/sadmin/view-allcustomer"
+        path="/salonadmin/view-allcustomer"
         element={
           <ProtectedRoute>
             <SAallCustomer />
@@ -96,7 +114,7 @@ const SalonAdminRoutes = () => {
         }
       />
       <Route
-        path="/sadmin/employee"
+        path="/salonadmin/employee"
         element={
           <ProtectedRoute>
             <Employee />
@@ -104,7 +122,7 @@ const SalonAdminRoutes = () => {
         }
       />
       <Route
-        path="/sadmin/view-employee"
+        path="/salonadmin/view-employee"
         element={
           <ProtectedRoute>
             <SAViewEmployee />
@@ -112,7 +130,7 @@ const SalonAdminRoutes = () => {
         }
       />
       <Route
-        path="/sadmin/report"
+        path="/salonadmin/report"
         element={
           <ProtectedRoute>
             <SAreport />
@@ -120,7 +138,7 @@ const SalonAdminRoutes = () => {
         }
       />
       <Route
-        path="/sadmin/customer-report"
+        path="/salonadmin/customer-report"
         element={
           <ProtectedRoute>
             <Customerreport />
@@ -128,7 +146,7 @@ const SalonAdminRoutes = () => {
         }
       />
       <Route
-        path="/sadmin/employee-report"
+        path="/salonadmin/employee-report"
         element={
           <ProtectedRoute>
             <EmployeeReport />
@@ -136,7 +154,7 @@ const SalonAdminRoutes = () => {
         }
       />
       <Route
-        path="/sadmin/booking-report"
+        path="/salonadmin/booking-report"
         element={
           <ProtectedRoute>
             <BookingReport />
@@ -144,15 +162,25 @@ const SalonAdminRoutes = () => {
         }
       />
       <Route
-        path="/sadmin/assign-branch"
+        path="/salonadmin/assign-branch"
         element={
           <ProtectedRoute>
             <SASetting />
           </ProtectedRoute>
+        }/>
+
+<Route
+        path="/salonadmin/main-branch"
+        element={
+          <ProtectedRoute>
+            <MainbranchPage />
+          </ProtectedRoute>
         }
       />
+
+
       <Route
-        path="/sadmin/view-branch"
+        path="/salonadmin/view-branch"
         element={
           <ProtectedRoute>
             <ViewBranch />
@@ -160,7 +188,7 @@ const SalonAdminRoutes = () => {
         }
       />
       <Route
-        path="/sadmin/profile"
+        path="/salonadmin/profile"
         element={
           <ProtectedRoute>
             <ProfilePage />
@@ -168,21 +196,23 @@ const SalonAdminRoutes = () => {
         }
       />
       <Route
-        path="/sadmin/create-product"
+        path="/salonadmin/create-product"
         element={
           <ProtectedRoute>
             <CreateProduct />
           </ProtectedRoute>
         }
       />
-      <Route path="/sadmin/create-category" 
-       element={
-        <ProtectedRoute>
-          <CreateCategory />
-        </ProtectedRoute>
-      } />
       <Route
-        path="/sadmin/display-product"
+        path="/salonadmin/create-category"
+        element={
+          <ProtectedRoute>
+            <CreateCategory />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/salonadmin/display-product"
         element={
           <ProtectedRoute>
             <AllProduct />
@@ -190,31 +220,16 @@ const SalonAdminRoutes = () => {
         }
       />
       <Route
-        path="/sadmin/stock-management"
-        element={
-          <ProtectedRoute>
-            <Stockmangement />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/sadmin/assign-role"
+        path="/salonadmin/assign-role"
         element={
           <ProtectedRoute>
             <Assignrole />
           </ProtectedRoute>
         }
       />
+      
       <Route
-        path="/sadmin/assign-staff"
-        element={
-          <ProtectedRoute>
-            <AssignStaff />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/sadmin/all-orders"
+        path="/salonadmin/all-orders"
         element={
           <ProtectedRoute>
             <Allorders />
@@ -222,10 +237,18 @@ const SalonAdminRoutes = () => {
         }
       />
       <Route
-        path="/sadmin/services-duration"
+        path="/salonadmin/services-duration"
         element={
           <ProtectedRoute>
             <ViewServicee />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/salonadmin/client-info/:id"
+        element={
+          <ProtectedRoute>
+            <ClientDetails />
           </ProtectedRoute>
         }
       />
