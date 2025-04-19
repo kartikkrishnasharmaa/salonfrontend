@@ -44,6 +44,9 @@ const BookingFormModal = ({
   const staffList = [
     { _id: "64f1a2b3c4d5e6f7a8b9c0d3", name: "Emily Davis" },
     { _id: "64f1a2b3c4d5e6f7a8b9c0d4", name: "John Doe" },
+    { _id: "64f1a2b3c4d5e6f7a8b9c0d5", name: "Jane Smith" },
+    { _id: "64f1a2b3c4d5e6f7a8b9c0d6", name: "Michael Brown" },
+    { _id: "64f1a2b3c4d5e6f7a8b9c0d7", name: "Sarah Johnson" },
   ];
 
   useEffect(() => {

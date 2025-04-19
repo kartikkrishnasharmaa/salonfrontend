@@ -19,6 +19,22 @@ function AllProducts() {
   const [barcode, setBarcode] = useState("");
   const [inclusiveTax, setInclusiveTax] = useState(false);
   const [isConsumable, setIsConsumable] = useState("");
+  const [formData, setFormData] = useState({
+    locationName: "",
+    businessName: "",
+    address: "",
+    state: "",
+    city: "",
+    area: "",
+    phone: "",
+  });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const tabsStyle = `
   .custom-rc-tabs {
@@ -101,7 +117,26 @@ function AllProducts() {
   };
 
   const handleCityChange = (e) => {
-    setSelectedCity(e.target.value);
+    const city = e.target.value;
+    setSelectedCity(city);
+    setFormData((prev) => ({
+      ...prev,
+      city,
+      area: "",
+    }));
+  };
+  
+  const handleAreaChange = (e) => {
+
+    const area = e.target.value;
+    setFormData((prev) => ({
+      ...prev,
+      area,
+    }));
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData);
   };
 
   return (
@@ -119,42 +154,36 @@ function AllProducts() {
           <Tabs
             defaultActiveKey="1"
             className="custom-rc-tabs"
-
             items={[
               {
                 key: "1",
                 label: "Info",
                 children: (
-                  <form className="p-6">
+                  <form className="p-6" onSubmit={handleSubmit}>
                     <input
                       type="text"
+                      name="locationName"
                       placeholder="Location Name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      className="w-full p-3 border rounded-md mb-4"
+                      value={formData.locationName}
+                      onChange={handleInputChange}
+                      className="w-full text-black-900 p-3 border rounded-md mb-4"
                       required
                     />
                     <input
                       type="text"
+                      name="businessName"
                       placeholder="Business Name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
+                      value={formData.businessName}
+                      onChange={handleInputChange}
                       className="w-full p-3 border rounded-md mb-4"
                       required
                     />
                     <input
                       type="text"
-                      placeholder="Brand Name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      className="w-full p-3 border rounded-md mb-4"
-                      required
-                    />
-                    <input
-                      type="text"
+                      name="address"
                       placeholder="Address"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
+                      value={formData.address}
+                      onChange={handleInputChange}
                       className="w-full p-3 border rounded-md mb-4"
                       required
                     />
@@ -162,7 +191,8 @@ function AllProducts() {
                     {/* State Dropdown */}
                     <select
                       className="w-full p-3 border rounded-md mb-4"
-                      value={selectedState}
+                      name="state"
+                      value={formData.state}
                       onChange={handleStateChange}
                       required
                     >
@@ -175,15 +205,16 @@ function AllProducts() {
                     </select>
 
                     {/* City Dropdown - only shown when a state is selected */}
-                    {selectedState && (
+                    {formData.state && (
                       <select
                         className="w-full p-3 border rounded-md mb-4"
-                        value={selectedCity}
+                        name="city"
+                        value={formData.city}
                         onChange={handleCityChange}
                         required
                       >
                         <option value="">Select City</option>
-                        {statesWithCities[selectedState].map((city) => (
+                        {statesWithCities[formData.state].map((city) => (
                           <option key={city} value={city}>
                             {city}
                           </option>
@@ -192,13 +223,16 @@ function AllProducts() {
                     )}
 
                     {/* Area Dropdown - only shown when a city is selected */}
-                    {selectedCity && citiesWithAreas[selectedCity] && (
+                    {formData.city && citiesWithAreas[formData.city] && (
                       <select
                         className="w-full p-3 border rounded-md mb-4"
+                        name="area"
+                        value={formData.area}
+                        onChange={handleAreaChange}
                         required
                       >
                         <option value="">Select Area</option>
-                        {citiesWithAreas[selectedCity].map((area) => (
+                        {citiesWithAreas[formData.city].map((area) => (
                           <option key={area} value={area}>
                             {area}
                           </option>
@@ -212,9 +246,13 @@ function AllProducts() {
                           <FaPhone className="text-gray-400" />
                         </div>
                         <input
-                          type="number"
+                          type="tel"
+                          name="phone"
                           placeholder="Phone Number"
+                          value={formData.phone}
+                          onChange={handleInputChange}
                           className="w-full p-3 border rounded-md pl-10"
+                          required
                         />
                       </div>
                     </div>
@@ -228,6 +266,7 @@ function AllProducts() {
                   </form>
                 ),
               },
+
               {
                 key: "2",
                 className: "ml-4",
