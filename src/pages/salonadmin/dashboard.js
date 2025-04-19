@@ -14,14 +14,13 @@ import {
   Pie,
   Cell,
 } from "recharts";
-
+ 
 const SADashboard = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [withTax, setWithTax] = useState(true);
   const [search, setSearch] = useState("");
   const [filteredResult, setFilteredResult] = useState(null);
-
   const totalServices = {
     total: 849,
     male: 400,
@@ -39,34 +38,29 @@ const SADashboard = () => {
     retail: 1974289,
     consumable: 2609824,
   };
-
   const inHandCash = {
     total: 26342,
     retail: 81974289,
     consumable: 2609824,
   };
-
   const handleSearch = () => {
     const result = {
       message: `Search for "${search}" from ${startDate} to ${endDate} (with tax: ${withTax})`,
     };
     setFilteredResult(result);
   };
-
   const walkinAppointmentData = [
     { name: "Walk-in Male", value: 300 },
     { name: "Walk-in Female", value: 350 },
     { name: "Appointment Male", value: 100 },
     { name: "Appointment Female", value: 99 },
   ];
-
   const staffRevenueData = [
     { name: "Staff A", value: 5000 },
     { name: "Staff B", value: 8000 },
     { name: "Staff C", value: 3000 },
     { name: "Staff D", value: 7000 },
   ];
-
   const salesData = [
     { date: "Apr 01", sales: 10000 },
     { date: "Apr 02", sales: 12000 },
@@ -75,7 +69,6 @@ const SADashboard = () => {
     { date: "Apr 05", sales: 9000 },
     { date: "Apr 06", sales: 16000 },
   ];
-
   const revenueData = [
     { date: "Apr 01", revenue: 12000 },
     { date: "Apr 02", revenue: 15000 },
