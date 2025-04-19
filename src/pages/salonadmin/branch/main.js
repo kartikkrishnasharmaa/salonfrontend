@@ -3,9 +3,13 @@ import SAAdminLayout from "../../../layouts/Salonadmin";
 import { FaMapMarkerAlt, FaPhone, FaRupeeSign } from "react-icons/fa";
 import Tabs from "rc-tabs";
 import "rc-tabs/assets/index.css";
+import BranchSelector from "../../../components/BranchSelector";
+
 
 function AllProducts() {
   // Initialize state for all required variables
+  const [branches, setBranches] = useState([]);
+  const [selectedBranch, setSelectedBranch] = useState(null);
   const [name, setName] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
@@ -28,6 +32,8 @@ function AllProducts() {
     area: "",
     phone: "",
   });
+
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({

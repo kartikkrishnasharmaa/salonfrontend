@@ -21,6 +21,22 @@ import {
 import { useState } from "react";
 import ClientInfo from "./Information";
 import MergeInfo from "./merge-client";
+import Addprepaid from "./add-prepaid";
+import AdvancePayment from "./advance-amount";
+import Allcustomer from "./all-customer";
+import Appointments from "./appointment";
+import Giftcardredeem from "./gift-card-redeem";
+import Giftcard from "./gift-card";
+import Information from "./Information";
+import Itemwiseapt from "./item-wise-appointment"
+import MergeClient from "./merge-client"
+import NewVisitDiscount from "./new-visit-discount"
+import Outstanding from "./outstanding-invoice"
+import PackageBalance from "./package-balance"
+import PackageSale from "./package-sale"
+import Prepaidcard from "./pre-paid-card"
+import RewardsPoint from "./rewards-point"
+import SecondaryClient from "./secondary-client"
 
 function ClientDetails() {
   const location = useLocation();
@@ -832,7 +848,7 @@ function ClientDetails() {
     {
       key: "package sale",
       label: "Package Sale",
-      content: <p>Package Sale</p>,
+      content: <PackageSale client={client} />,
     },
     {
       key: "package balance",
@@ -842,7 +858,7 @@ function ClientDetails() {
     {
       key: "outstanding invoice",
       label: "Outstanding Invoice",
-      content: <p>outstanding invoice.</p>,
+      content: <Outstanding client={client} />,
     },
     {
       key: "add prepaid card",
@@ -873,12 +889,12 @@ function ClientDetails() {
     {
       key: "New Visit Discount",
       label: "New Visit Discount",
-      content: <p>New Visit Discount</p>,
+      content: <NewVisitDiscount client={client} />,
     },
     {
       key: "Secondary Client",
       label: "Secondary Client",
-      content: <p>Secondary Client</p>,
+      content: <SecondaryClient client={client} />,
     },
   ];
 
